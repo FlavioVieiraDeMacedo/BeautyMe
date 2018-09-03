@@ -1,0 +1,21 @@
+﻿@model List<BeautyMe.Models.Agenda>
+@{
+    ViewBag.Title = "VerAgendaProfissional";
+}
+
+<h2>Agenda do profissional</h2>
+@foreach (var item in Model)
+{
+<div>
+    <h2>@item.Data</h2>
+    <h3>@item.Servico.Name</h3>
+    <h4>@item.Servico.Profissional.Name</h4>
+
+    <h4>@item.Servico.Tempo</h4>
+    <h4>@item.Cliente.Cidade</h4>
+    <h4>@item.Cliente.Bairro</h4>
+
+    <h4>@item.Cliente.Name</h4>
+</div>
+    <hr />
+}

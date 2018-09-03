@@ -12,12 +12,12 @@ namespace BeautyMe.Controllers
 {
     public class ProfissionalsController : Controller
     {
-        private ProfissionalModel db = new ProfissionalModel();
+        private Contexto _contexto = new Contexto();
 
         // GET: Profissionals
         public ActionResult Index()
         {
-            return View(db.ProfissionalEntities.ToList());
+            return View(_contexto.ProfissionalEntities.ToList());
         }
 
         // GET: Profissionals/Details/5
@@ -27,7 +27,7 @@ namespace BeautyMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profissional profissional = db.ProfissionalEntities.Find(id);
+            Profissional profissional = _contexto.ProfissionalEntities.Find(id);
             if (profissional == null)
             {
                 return HttpNotFound();
@@ -50,8 +50,8 @@ namespace BeautyMe.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ProfissionalEntities.Add(profissional);
-                db.SaveChanges();
+                _contexto.ProfissionalEntities.Add(profissional);
+                _contexto.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +65,7 @@ namespace BeautyMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profissional profissional = db.ProfissionalEntities.Find(id);
+            Profissional profissional = _contexto.ProfissionalEntities.Find(id);
             if (profissional == null)
             {
                 return HttpNotFound();
@@ -82,8 +82,8 @@ namespace BeautyMe.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(profissional).State = EntityState.Modified;
-                db.SaveChanges();
+                _contexto.Entry(profissional).State = EntityState.Modified;
+                _contexto.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(profissional);
@@ -96,7 +96,7 @@ namespace BeautyMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Profissional profissional = db.ProfissionalEntities.Find(id);
+            Profissional profissional = _contexto.ProfissionalEntities.Find(id);
             if (profissional == null)
             {
                 return HttpNotFound();
@@ -109,9 +109,9 @@ namespace BeautyMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Profissional profissional = db.ProfissionalEntities.Find(id);
-            db.ProfissionalEntities.Remove(profissional);
-            db.SaveChanges();
+            Profissional profissional = _contexto.ProfissionalEntities.Find(id);
+            _contexto.ProfissionalEntities.Remove(profissional);
+            _contexto.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -119,9 +119,19 @@ namespace BeautyMe.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _contexto.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult ListarServicos(int? profId)
+        {
+            if (profId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var profissional = _contexto.ProfissionalEntities.ToList().Find(a => a.Id == profId);
+            return View(profissional.Servicos.ToList());
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿@model List<BeautyMe.Models.Servico>
+@{
+    ViewBag.Title = "ListarServicos";
+}
+
+<h2>ListarServicos</h2>
+@if (Model != null)
+{
+    <div class="list-group">
+        @foreach (var item in Model)
+        {
+            <a class="list-group-item active" onclick="profId.value = '@item.Profissional_Id',$('#verAgenda')[0].submit()">
+                    @item.Name : @item.Preco : @item.Tempo : @item.Descricao
+            </a>
+        }
+    </div>
+}
+@using (Html.BeginForm("VerAgendaProfissional", "Agenda", FormMethod.Get, new { id = "verAgenda" }))
+{
+    <input type="hidden" id="profId" name="profId" />
+}

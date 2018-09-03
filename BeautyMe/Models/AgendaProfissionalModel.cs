@@ -8,7 +8,7 @@ namespace BeautyMe.Models
     public class AgendaProfissionalModel : DbContext
     {
         public AgendaProfissionalModel()
-            : base("name=AgendaProfissionalModel")
+            : base("name=DefaultConnection")
         {
         }
 

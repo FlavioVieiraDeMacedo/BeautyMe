@@ -1,20 +1,6 @@
 namespace BeautyMe.Models
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Data.Entity;
-    using System.Linq;
-
-    public class ClienteModel : DbContext
-    {
-        public ClienteModel()
-            : base("name=ClienteModel")
-        {
-        }
-        
-        public virtual DbSet<Cliente> ClienteEntities { get; set; }
-    }
-
     public class Cliente
     {
         [Key]

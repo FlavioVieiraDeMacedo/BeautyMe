@@ -12,12 +12,12 @@ namespace BeautyMe.Controllers
 {
     public class ServicosController : Controller
     {
-        private ServicosModel db = new ServicosModel();
+        private Contexto _contexto = new Contexto();
 
         // GET: Servicos
         public ActionResult Index()
         {
-            return View(db.ServicosEntities.ToList());
+            return View(_contexto.ServicosEntities.ToList());
         }
 
         // GET: Servicos/Details/5
@@ -27,7 +27,7 @@ namespace BeautyMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Servico servico = db.ServicosEntities.Find(id);
+            Servico servico = _contexto.ServicosEntities.Find(id);
             if (servico == null)
             {
                 return HttpNotFound();
@@ -48,12 +48,12 @@ namespace BeautyMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Descricao,Preco,Tempo")] Servico servico)
         {
-            ProfissionalModel prof = new ProfissionalModel();
             if (ModelState.IsValid)
             {
-                servico.Profissional = prof.ProfissionalEntities.ToList().First();//logica para pegar o profissional logado
-                db.ServicosEntities.Add(servico);
-                db.SaveChanges();
+                
+                servico.Profissional = _contexto.ProfissionalEntities.ToList().First();//logica para pegar o profissional logado
+                _contexto.ServicosEntities.Add(servico);
+                _contexto.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -67,7 +67,7 @@ namespace BeautyMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Servico servico = db.ServicosEntities.Find(id);
+            Servico servico = _contexto.ServicosEntities.Find(id);
             if (servico == null)
             {
                 return HttpNotFound();
@@ -84,8 +84,8 @@ namespace BeautyMe.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(servico).State = EntityState.Modified;
-                db.SaveChanges();
+                _contexto.Entry(servico).State = EntityState.Modified;
+                _contexto.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(servico);
@@ -98,7 +98,7 @@ namespace BeautyMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Servico servico = db.ServicosEntities.Find(id);
+            Servico servico = _contexto.ServicosEntities.Find(id);
             if (servico == null)
             {
                 return HttpNotFound();
@@ -111,17 +111,22 @@ namespace BeautyMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Servico servico = db.ServicosEntities.Find(id);
-            db.ServicosEntities.Remove(servico);
-            db.SaveChanges();
+            Servico servico = _contexto.ServicosEntities.Find(id);
+            _contexto.ServicosEntities.Remove(servico);
+            _contexto.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Pesquisar(string pesquisa = "")
+        {
+            return View(_contexto.ServicosEntities.ToList().Where(p => p.Name.Contains(pesquisa)).ToList());
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
             {
-                db.Dispose();
+                _contexto.Dispose();
             }
             base.Dispose(disposing);
         }

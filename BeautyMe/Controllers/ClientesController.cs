@@ -12,12 +12,13 @@ namespace BeautyMe.Controllers
 {
     public class ClientesController : Controller
     {
-        private ClienteModel db = new ClienteModel();
+
+        private Contexto _contexto = new Contexto();
 
         // GET: Clientes
         public ActionResult Index()
         {
-            return View(db.ClienteEntities.ToList());
+            return View(_contexto.ClienteEntities.ToList());
         }
 
         // GET: Clientes/Details/5
@@ -27,7 +28,7 @@ namespace BeautyMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.ClienteEntities.Find(id);
+            Cliente cliente = _contexto.ClienteEntities.Find(id);
             if (cliente == null)
             {
                 return HttpNotFound();
@@ -50,8 +51,8 @@ namespace BeautyMe.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.ClienteEntities.Add(cliente);
-                db.SaveChanges();
+                _contexto.ClienteEntities.Add(cliente);
+                _contexto.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +66,7 @@ namespace BeautyMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.ClienteEntities.Find(id);
+            Cliente cliente = _contexto.ClienteEntities.Find(id);
             if (cliente == null)
             {
                 return HttpNotFound();
@@ -82,8 +83,8 @@ namespace BeautyMe.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cliente).State = EntityState.Modified;
-                db.SaveChanges();
+                _contexto.Entry(cliente).State = EntityState.Modified;
+                _contexto.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(cliente);
@@ -96,7 +97,7 @@ namespace BeautyMe.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = db.ClienteEntities.Find(id);
+            Cliente cliente = _contexto.ClienteEntities.Find(id);
             if (cliente == null)
             {
                 return HttpNotFound();
@@ -109,9 +110,9 @@ namespace BeautyMe.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cliente cliente = db.ClienteEntities.Find(id);
-            db.ClienteEntities.Remove(cliente);
-            db.SaveChanges();
+            Cliente cliente = _contexto.ClienteEntities.Find(id);
+            _contexto.ClienteEntities.Remove(cliente);
+            _contexto.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -119,7 +120,7 @@ namespace BeautyMe.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _contexto.Dispose();
             }
             base.Dispose(disposing);
         }
