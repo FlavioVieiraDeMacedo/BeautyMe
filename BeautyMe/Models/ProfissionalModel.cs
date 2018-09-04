@@ -16,6 +16,7 @@ namespace BeautyMe.Models
 
         public string Cidade { get; set; }
 
+        public string Email { get; set; }
         
         public virtual ICollection<Servico> Servicos { get; set; }
     }

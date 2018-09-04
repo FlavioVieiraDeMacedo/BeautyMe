@@ -22,35 +22,40 @@ namespace BeautyMe.Controllers
         }
 
         // GET: Clientes/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
+            var _cli = _contexto.ClienteEntities.Where(a => a.Email == User.Identity.Name).ToArray();
+            if (_cli.Length <= 0)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Create");
             }
-            Cliente cliente = _contexto.ClienteEntities.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
+            Cliente cliente = _cli[0];
             return View(cliente);
         }
 
         // GET: Clientes/Create
+        [Authorize(Roles = "Cliente")]
         public ActionResult Create()
         {
-            return View();
+            var _cli = _contexto.ClienteEntities.Where(a => a.Email == User.Identity.Name).ToArray();
+            if (_cli.Length <=0)
+            {
+                return View();
+            }
+            Cliente cliente = _cli[0];
+            
+            return View("Details");
         }
 
         // POST: Clientes/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Cliente")]
         public ActionResult Create([Bind(Include = "Id,Name,Sexo,CPF,Pais,Cidade,Bairro,CEP,Endereco,Complemento,Tomada110,Tomada220,Espelho,Cadeira,Agua,Luz")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
+                cliente.Email = User.Identity.Name;
                 _contexto.ClienteEntities.Add(cliente);
                 _contexto.SaveChanges();
                 return RedirectToAction("Index");
@@ -60,13 +65,13 @@ namespace BeautyMe.Controllers
         }
 
         // GET: Clientes/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
+            Cliente cliente = _contexto.ClienteEntities.Where(a => a.Email == User.Identity.Name).ToArray()[0];
+            if (cliente == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cliente cliente = _contexto.ClienteEntities.Find(id);
             if (cliente == null)
             {
                 return HttpNotFound();
@@ -75,8 +80,6 @@ namespace BeautyMe.Controllers
         }
 
         // POST: Clientes/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Sexo,CPF,Pais,Cidade,Bairro,CEP,Endereco,Complemento,Tomada110,Tomada220,Espelho,Cadeira,Agua,Luz")] Cliente cliente)
@@ -91,30 +94,30 @@ namespace BeautyMe.Controllers
         }
 
         // GET: Clientes/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Cliente cliente = _contexto.ClienteEntities.Find(id);
-            if (cliente == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cliente);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Cliente cliente = _contexto.ClienteEntities.Find(id);
+        //    if (cliente == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(cliente);
+        //}
 
         // POST: Clientes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            Cliente cliente = _contexto.ClienteEntities.Find(id);
-            _contexto.ClienteEntities.Remove(cliente);
-            _contexto.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    Cliente cliente = _contexto.ClienteEntities.Find(id);
+        //    _contexto.ClienteEntities.Remove(cliente);
+        //    _contexto.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

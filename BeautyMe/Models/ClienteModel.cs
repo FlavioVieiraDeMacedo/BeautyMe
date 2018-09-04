@@ -8,7 +8,8 @@ namespace BeautyMe.Models
         public string Name { get; set; }
         public string Sexo { get; set; }
         public string CPF { get; set; }
-        
+
+        public string Email { get; set; }
         //Local 
         public string Pais { get; set; }
         public string Cidade { get; set; }
