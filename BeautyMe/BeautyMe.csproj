@@ -215,6 +215,8 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\ProfissionalModel.cs" />
     <Compile Include="Models\ServicosModel.cs" />
+    <Compile Include="Models\ViewModelAgendaProfissional.cs" />
+    <Compile Include="Models\ViewModelCreateAgenda.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

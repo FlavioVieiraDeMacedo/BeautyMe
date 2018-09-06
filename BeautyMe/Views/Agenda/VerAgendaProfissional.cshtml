@@ -1,21 +1,34 @@
-﻿@model List<BeautyMe.Models.Agenda>
+﻿@model BeautyMe.Models.ViewModelAgendaProfissional
 @{
     ViewBag.Title = "VerAgendaProfissional";
 }
 
 <h2>Agenda do profissional</h2>
-@foreach (var item in Model)
+@foreach (var item in Model.agenda)
 {
-<div>
-    <h2>@item.Data</h2>
-    <h3>@item.Servico.Name</h3>
-    <h4>@item.Servico.Profissional.Name</h4>
+    <div>
+        <h2>@item.Data</h2>
+        <h3>@item.Servico.Name</h3>
+        <h4>@item.Servico.Profissional.Name</h4>
 
-    <h4>@item.Servico.Tempo</h4>
-    <h4>@item.Cliente.Cidade</h4>
-    <h4>@item.Cliente.Bairro</h4>
+        <h4>@item.Servico.Tempo</h4>
+        <h4>@item.Cliente.Cidade</h4>
+        <h4>@item.Cliente.Bairro</h4>
 
-    <h4>@item.Cliente.Name</h4>
-</div>
+        <h4>@item.Cliente.Name</h4>
+
+
+    </div>
     <hr />
+}
+@if (User.IsInRole("Cliente"))
+{
+    using (Html.BeginForm())
+    {
+        @Html.HiddenFor(a => a.IdProf);
+
+        <button class="btn btn-danger" type="submit">
+            <span class="fas fa-plus-square" aria-hidden="true"></span>
+        </button>
+    }
 }

@@ -17,7 +17,8 @@ namespace BeautyMe.Controllers
         // GET: Servicos
         public ActionResult Index()
         {
-            return View(_contexto.ServicosEntities.ToList());
+            var servicos = _contexto.ServicosEntities.ToList().Where(a => a.Profissional.Email == User.Identity.Name);
+            return View(servicos);
         }
 
         // GET: Servicos/Details/5

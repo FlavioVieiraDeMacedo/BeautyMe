@@ -36,27 +36,15 @@ namespace BeautyMe.Controllers
             //return View(db.AgendaEntities.ToList());
             return RedirectToAction("Create");
         }
-
-        // GET: Agenda/Details/5
-        //public ActionResult Details(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Agenda agenda = db.AgendaEntities.Find(id);
-        //    if (agenda == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(agenda);
-        //}
-
+        
         // GET: Agenda/Create
         [Authorize]
-        public ActionResult Create()
+        public ActionResult Create(int IdProf)
         {
-            return View();
+            ViewModelCreateAgenda viewModel = new ViewModelCreateAgenda() {
+                servicosDoProfissional = db.ProfissionalEntities.Find(IdProf).Servicos.ToList()
+            };
+            return View(viewModel);
         }
 
         // POST: Agenda/Create
@@ -64,13 +52,14 @@ namespace BeautyMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Data,Descricao")] Agenda agenda, int IdServ)
+        public ActionResult Create(ViewModelCreateAgenda viewModel)
         {
+            var agenda = viewModel.agenda;
             int IdCli = db.ClienteEntities.Where(a => a.Email == User.Identity.Name).ToArray()[0].Id;
             if (ModelState.IsValid)
             {
                 agenda.Cliente = db.ClienteEntities.Find(IdCli);
-                agenda.Servico = db.ServicosEntities.Find(IdServ);
+                agenda.Servico = db.ServicosEntities.Find(viewModel.IdServ);
 
                 db.AgendaEntities.Add(agenda);
                 db.SaveChanges();
@@ -79,32 +68,7 @@ namespace BeautyMe.Controllers
 
             return View(agenda);
         }
-
-        // GET: Agenda/Delete/5
-        //public ActionResult Delete(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    Agenda agenda = db.AgendaEntities.Find(id);
-        //    if (agenda == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(agenda);
-        //}
-
-        // POST: Agenda/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult DeleteConfirmed(int id)
-        //{
-        //    Agenda agenda = db.AgendaEntities.Find(id);
-        //    db.AgendaEntities.Remove(agenda);
-        //    db.SaveChanges();
-        //    return RedirectToAction("Index");
-        //}
+        
 
         protected override void Dispose(bool disposing)
         {
@@ -115,18 +79,25 @@ namespace BeautyMe.Controllers
             base.Dispose(disposing);
         }
 
+        [HttpGet]
         [Authorize(Roles = "Cliente")]
         public ActionResult VerAgendaCliente()
         {
-            Cliente cliente = db.ClienteEntities.Where(a => a.Email == User.Identity.Name).ToArray()[0];
-            
-
-            return View(db.AgendaEntities.ToList().Where(a => a.Cliente.Id == cliente.Id).ToList());
+            var cli = db.ClienteEntities.Where(a => a.Email == User.Identity.Name).ToArray();
+            if (cli.Length>0)
+            {
+                db.ClienteEntities.ToList();
+                db.ServicosEntities.ToList();
+                return View(db.AgendaEntities.ToList().Where(a => a.Cliente.Id == cli[0].Id).ToList());
+            }
+            return View("Create");
+           
         }
 
-
+        [HttpGet]
         public ActionResult VerAgendaProfissional(int? profId)
         {
+            var viewModel = new ViewModelAgendaProfissional();
             if (profId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -147,8 +118,16 @@ namespace BeautyMe.Controllers
             {
                 agenda.AddRange(db.AgendaEntities.Where(a=>a.Servico.Id==item));
             }
-
-            return View(agenda);
+            viewModel.agenda = agenda;
+            viewModel.IdProf = (int)profId;
+            return View(viewModel);
         }
+        [HttpPost]
+        public ActionResult VerAgendaProfissional(ViewModelAgendaProfissional viewModel)
+        {
+
+            return RedirectToAction("Create", new { IdProf = viewModel.IdProf });
+        }
+
     }
 }
