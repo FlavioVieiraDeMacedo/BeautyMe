@@ -9,5 +9,6 @@ namespace BeautyMe.Models
     {
         public List<Agenda> agenda { get; set; }
         public int IdProf { get; set; }
+        public string NomeProf { get; set; }
     }
 }

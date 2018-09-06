@@ -118,6 +118,7 @@ namespace BeautyMe.Controllers
             {
                 agenda.AddRange(db.AgendaEntities.Where(a=>a.Servico.Id==item));
             }
+            viewModel.NomeProf = prof.Name;
             viewModel.agenda = agenda;
             viewModel.IdProf = (int)profId;
             return View(viewModel);

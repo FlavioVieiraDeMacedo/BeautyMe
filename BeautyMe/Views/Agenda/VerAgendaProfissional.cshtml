@@ -3,32 +3,50 @@
     ViewBag.Title = "VerAgendaProfissional";
 }
 
-<h2>Agenda do profissional</h2>
-@foreach (var item in Model.agenda)
-{
-    <div>
-        <h2>@item.Data</h2>
-        <h3>@item.Servico.Name</h3>
-        <h4>@item.Servico.Profissional.Name</h4>
+<h2> @Model.NomeProf</h2>
 
-        <h4>@item.Servico.Tempo</h4>
-        <h4>@item.Cliente.Cidade</h4>
-        <h4>@item.Cliente.Bairro</h4>
-
-        <h4>@item.Cliente.Name</h4>
-
-
-    </div>
-    <hr />
-}
 @if (User.IsInRole("Cliente"))
 {
     using (Html.BeginForm())
     {
         @Html.HiddenFor(a => a.IdProf);
-
-        <button class="btn btn-danger" type="submit">
-            <span class="fas fa-plus-square" aria-hidden="true"></span>
+        <p>Deseja agendar um serviço com esse profissional?</p>
+        <button class="btn btn-success" type="submit" style="width:100%">
+            Agendar Agora
         </button>
     }
 }
+<hr />
+<div class="list-group">
+    @foreach (var item in Model.agenda)
+    {
+
+
+        if (User.IsInRole("Profissional"))
+        {
+            <div class="list-group-item">
+                <h3>@item.Servico.Name    -  @item.Data.Date.ToShortDateString() @item.Data.Date.ToShortTimeString() </h3>
+                <p>
+                    Tempo estimado: @item.Servico.Tempo
+                    <br />
+                    Cliente: @item.Cliente.Name
+                    <br />
+                    Localização: @item.Cliente.Cidade  @item.Cliente.Bairro
+                </p>
+
+            </div>
+        }
+        if (User.IsInRole("Cliente"))
+        {
+            <div class="list-group-item">
+                <div class="row">
+                    <div class="col-md-9"><h3><small class="text-danger">Horário Ocupado - @item.Data.Date.ToShortDateString() @item.Data.Date.ToShortTimeString() - Tempo estimado: @item.Servico.Tempo</small></h3></div>
+                </div>
+            </div>
+        }
+
+
+        <br />
+    }
+</div>
+
