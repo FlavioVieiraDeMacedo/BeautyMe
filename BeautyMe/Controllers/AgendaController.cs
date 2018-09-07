@@ -90,20 +90,20 @@ namespace BeautyMe.Controllers
                 db.ServicosEntities.ToList();
                 return View(db.AgendaEntities.ToList().Where(a => a.Cliente.Id == cli[0].Id).ToList());
             }
-            return View("Create");
+            return RedirectToAction("Create","Clientes");
            
         }
 
         [HttpGet]
-        public ActionResult VerAgendaProfissional(int? profId)
+        public ActionResult VerAgendaProfissional(int? profId1)
         {
             var viewModel = new ViewModelAgendaProfissional();
-            if (profId == null)
+            if (profId1 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var prof = db.ProfissionalEntities.ToList().Find(a => a.Id == profId);
+            var prof = db.ProfissionalEntities.ToList().Find(a => a.Id == profId1);
             var cli = db.ClienteEntities.ToList().First();
             var servicos = new List<int>();
 
@@ -120,7 +120,7 @@ namespace BeautyMe.Controllers
             }
             viewModel.NomeProf = prof.Name;
             viewModel.agenda = agenda;
-            viewModel.IdProf = (int)profId;
+            viewModel.IdProf = (int)profId1;
             return View(viewModel);
         }
         [HttpPost]

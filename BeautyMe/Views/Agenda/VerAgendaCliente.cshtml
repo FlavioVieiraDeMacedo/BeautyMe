@@ -3,15 +3,35 @@
     ViewBag.Title = "VerAgendaCliente";
 }
 
-<h2>Dashboard Cliente - com a agenda dele</h2>
-@foreach (var item in Model)
-{
-    <div>
-        <h2>@item.Data</h2>
-        <h3>@item.Servico.Name</h3>
-        <h4>@item.Servico.Profissional.Name</h4>
-        <h4>@item.Servico.Tempo</h4>
-    </div>
-    <hr />
-}
+<h2>Minha Agenda</h2>
 
+<div class="agenda">
+    <div class="table-responsive">
+        <table class="table table-condensed table-bordered">
+            
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="agenda-date" class="active" rowspan="1">
+                            <div class="dayofmonth">@item.Data.Day</div>
+                            <div class="shortdate text-muted">@item.Data.Month/@item.Data.Year</div>
+                        </td>
+                        <td class="agenda-time">
+                           @item.Data.Minute:@item.Data.Second
+                        </td>
+                        <td class="agenda-events">
+                            <div class="agenda-event">
+                                @item.Servico.Name  com o profissional <b>@item.Servico.Profissional.Name</b>
+                            </div>
+                        </td>
+                    </tr>
+
+
+
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>

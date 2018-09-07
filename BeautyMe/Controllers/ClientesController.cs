@@ -18,7 +18,8 @@ namespace BeautyMe.Controllers
         // GET: Clientes
         public ActionResult Index()
         {
-            return View(_contexto.ClienteEntities.ToList());
+            //return View(_contexto.ClienteEntities.ToList());
+            return RedirectToAction("Index","Agenda");
         }
 
         // GET: Clientes/Details/5

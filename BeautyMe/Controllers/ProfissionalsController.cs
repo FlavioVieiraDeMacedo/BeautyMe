@@ -18,7 +18,7 @@ namespace BeautyMe.Controllers
         public ActionResult Index()
         {
             //return View(_contexto.ProfissionalEntities.ToList());
-            return RedirectToAction("Details");
+            return RedirectToAction("Agenda");
         }
 
         // GET: Profissionals/Details/5
@@ -34,10 +34,14 @@ namespace BeautyMe.Controllers
         }
 
         // GET: Profissionals/Create
-        [Authorize(Roles = "Profissional")]
+        [Authorize]
         public ActionResult Create()
         {
-            return View();
+            if(User.IsInRole("Profissional"))
+            {
+                return View();
+            }
+            return RedirectToAction("Create", "Clientes");
         }
 
         // POST: Profissionals/Create
@@ -53,7 +57,7 @@ namespace BeautyMe.Controllers
                 profissional.Email = User.Identity.Name;
                 _contexto.ProfissionalEntities.Add(profissional);
                 _contexto.SaveChanges();
-                return RedirectToAction("Details");
+                return RedirectToAction("Agenda");
             }
 
             return View(profissional);

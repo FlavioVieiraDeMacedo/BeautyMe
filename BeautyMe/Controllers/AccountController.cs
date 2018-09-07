@@ -158,8 +158,7 @@ namespace BeautyMe.Controllers
                     await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
 
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-
-                    if (User.IsInRole("Cliente"))
+                    if(User.IsInRole("Cliente"))
                     {
                         return RedirectToAction("Create", "Clientes");
                     }
