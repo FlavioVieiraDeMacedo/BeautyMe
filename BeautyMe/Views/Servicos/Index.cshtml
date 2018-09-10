@@ -1,36 +1,57 @@
-﻿@model IEnumerable<BeautyMe.Models.Servico>
+﻿<link href="~/Content/cssDoGiovani.css" rel="stylesheet" />
+@model IEnumerable<BeautyMe.Models.Servico>
 
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Meus Serviços</h2>
-
-<p>
-    <a href="@Url.Action("Create")" class="btn btn-success">
-        <i class="glyphicon glyphicon-plus"></i>
-        <span>
-            <strong>Adicionar Serviço</strong>
-        </span>
-    </a>
-</p>
-<div class="row">
-    @foreach (var item in Model)
-    {
-        <div class="col-md-4 text-center col-sm-6 col-xs-12">
-            <div class="thumbnail product-box">
-                @*<img src="prod3.jpg" alt="website template image" />*@
-                <div class="caption">
-                    <h3>@Html.DisplayFor(modelItem => item.Name)</h3>
-                    <p>Preço :<strong>R$ @Html.DisplayFor(modelItem => item.Preco)</strong></p>
-                    <p>Tempo estimado de @Html.DisplayFor(modelItem => item.Tempo)</p>
-                    <p>@Html.DisplayFor(modelItem => item.Descricao)</p>
-                    <p>
-                        @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn btn-warning glyphicon glyphicon-pencil" })
-                        @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })
-                    </p>
-                </div>
+<div style="margin-top:60px;">
+    <header class="partner-header">
+        <div class="partner-header--box">
+            <div class="partner-header--box__iconbox">
+                <img class="partner-header--box__icon" src="https://i.imgur.com/VeJSOlR.png" alt="">
+            </div>
+            <div class="partner-header--box__info">
+                <p class="partner-header--box__infotitle">FIAP</p>
+                <p>Barbearia</p>
+                <p>São Paulo, Brazil</p>
+            </div>
+            <div class="partner-header--box__logobox">
+                <img class="partner-header--box__logo" src="https://via.placeholder.com/80x80" alt="">
             </div>
         </div>
-    }
-</div>
+    </header>
+    <main>
+        <div class="home-content">
+            <a href="@Url.Action("Create")" >
+                <i class="glyphicon glyphicon-plus"></i>
+                Adicionar Serviço
+            </a>
+        </div>
+        <div class="hr"></div>
+
+        <div class="home-content">
+            <div class="service-list">
+                @foreach (var item in Model)
+                {
+                    <div class="service">
+                        <div class="service--info">
+                            <p class="service--info__title">@Html.DisplayFor(modelItem => item.Name)</p>
+                            <p class="service--info__price">R$ @Html.DisplayFor(modelItem => item.Preco)</p>
+                            <p class="service--info__data">Tratamento de: @Html.DisplayFor(modelItem => item.Tempo)</p>
+                            <div class="service--actions">
+                                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "service--actions__link" })
+                                @Html.ActionLink("Remover", "Delete", new { id = item.Id }, new { @class = "service--actions__link" })
+                            </div>
+                        </div>
+                        <div class="service--imagebox">
+                            <img class="service--image" src="https://via.placeholder.com/180x120" alt="">
+                        </div>
+                    </div>
+                }
+                </div>
+            </div>
+    </main>
+
+
+
+                

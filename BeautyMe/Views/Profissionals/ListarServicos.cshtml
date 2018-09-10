@@ -1,30 +1,50 @@
-﻿@model List<BeautyMe.Models.Servico>
+﻿<link href="~/Content/cssDoGiovani.css" rel="stylesheet" />
+@model List<BeautyMe.Models.Servico>
 @{
     ViewBag.Title = "ListarServicos";
 }
-
-
 @using (Html.BeginForm("VerAgendaProfissional", "Agenda", FormMethod.Get, new { id = "verAgenda" }))
 {
     <input type="hidden" id="profId1" name="profId1" />
 }
-@if (Model.Count() > 0)
-{
-    <h2>@Model[0].Profissional.Name</h2>
-    <div class="row">
-        @foreach (var item in Model)
-        {
-            <div class="col-md-4 text-center col-sm-6 col-xs-12">
-                <div class="thumbnail product-box">
-                    <div class="caption">
-                        <a href="#" onclick="profId1.value = '@item.Profissional_Id',$('#verAgenda')[0].submit()"><h3>@item.Name</h3></a>
-                            <p>Preço :<strong>R$ @Html.DisplayFor(modelItem => item.Preco)</strong></p>
-                            <p>Tempo estimado :@Html.DisplayFor(modelItem => item.Tempo)</p>
-                            <p>Descrição: @item.Descricao</p>
-                        
+
+@if (Model.Count() > 0) {
+<header class="products-header" style="margin-top:60px">
+        <p class="products-header--title">@Model[0].Profissional.Name</p>
+</header>
+<main>
+    <div class="partner-avaliation">
+        <div class="partner-avaliation--item1">
+            <div class="avaliation">
+                <div class="avaliation--stars">
+                    <span>4,9</span>
+                    <img src="https://i.imgur.com/gCmogS4.png" alt="">
+                </div>
+                <div>Avaliações</div>
+            </div>
+        </div>
+        <div class="partner-avaliation--item2">
+            <p>Manicure/Cabeleleiro - $$$</p>
+            <p>Horarios disponíveis</p>
+        </div>
+    </div>
+    <div class="home-content">
+        <div class="product-list">
+            @foreach (var item in Model)
+            {
+                <div class="product">
+                    <div class="product--imagebox">
+                        <img class="service--image" src="https://via.placeholder.com/100x60" alt="">
+                    </div>
+
+                    <div class="product--info">
+                        <a href="#" onclick="profId1.value = '@item.Profissional_Id',$('#verAgenda')[0].submit()" class="product--info__title"><h3>@item.Name</h3></a>
+                        <p class="product--info__item">R$ @Html.DisplayFor(modelItem => item.Preco) 
+                            <br />Tratamento :@Html.DisplayFor(modelItem => item.Tempo)</p>
                     </div>
                 </div>
+            }   
             </div>
-        }
-    </div>
+        </div>
+    </main>
 }
