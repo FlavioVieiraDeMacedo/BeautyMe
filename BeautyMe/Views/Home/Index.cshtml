@@ -1,31 +1,71 @@
-﻿@{
+﻿<link href="~/Content/cssDoGiovani.css" rel="stylesheet" />
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>BeautyMe</h1>
-    <p class="lead">Sistema para unir profissionais do ramo de beleza e cliente que querem um tratamento diferenciado em seus domicilios.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<header class="home-header" style="margin-top:60px">
+    <div class="home-header--item -flexrow">
+        <div class="-medium">Beauty&Me</div>
+    </div>
+    <div class="home-header--item">
+        <p class="home-header--item__text">O profissional certo para o seu tempo e bolso.</p>
+    </div>
+    <div class="home-header--item">
+        @using (Html.BeginForm("Pesquisar","Servicos",FormMethod.Post,new { Id= "pesquisarForm" }))
+        {
+            <input type="text" class="home-header--search" placeholder="Pesquisar.." onclick="document.getElementById('pesquisarForm').submit();">
+        }
+        
+    </div>
+</header>
+<main class="home">
+    <div class="home-content">
+        <div class="main-image">
+            <img class="home-products--item__image" src="https://via.placeholder.com/300x180" alt="">
+            <p class="-small">Encontre os cortes mais modernos e perfeitos para o seu estilo</p>
+        </div>
+    </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <div class="hr"></div>
+    <div class="home-content">
+        <div class="home-products">
+            @using (Html.BeginForm("Pesquisar", "Servicos", FormMethod.Post, new { Id = "pesquisarForm1" }))
+            {
+                <div class="home-products--item" onclick="document.getElementById('pesquisarForm1').submit();">
+                    <div class="home-products--item__imagebox">
+                        <img class="home-products--item__image" src="https://via.placeholder.com/135x90" alt="">
+                    </div>
+
+                    @Html.Hidden("pesquisa", "manicure")
+                    <div class="home-products--item__info">
+                        <div class="home-products--item__title">
+                            Manicures
+                        </div>
+                        <div class="home-products--item__subtitle">
+                            Encontre Manicures
+                        </div>
+                    </div>
+                </div>
+            }
+
+            @using (Html.BeginForm("Pesquisar", "Servicos", FormMethod.Post, new { Id = "pesquisarForm2" }))
+            {
+                @Html.Hidden("pesquisa", "barbeiro")
+                <div class="home-products--item" onclick="document.getElementById('pesquisarForm2').submit();">
+                    <div class="home-products--item__imagebox">
+                        <img class="home-products--item__image" src="https://via.placeholder.com/135x90" alt="">
+                    </div>
+
+                    <div class="home-products--item__info">
+                        <div class="home-products--item__title">
+                            Barbeiros
+                        </div>
+                        <div class="home-products--item__subtitle">
+                            Encontre barbeiros x
+                        </div>
+                    </div>
+                </div>
+            }
+            </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+</main>

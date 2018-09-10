@@ -94,9 +94,14 @@ namespace BeautyMe.Controllers
            
         }
 
+        [Authorize]
         [HttpGet]
         public ActionResult VerAgendaProfissional(int? profId1)
         {
+            if (User.IsInRole("Profissional"))
+            {
+                profId1 = db.ProfissionalEntities.ToList().Find(a => a.Email == User.Identity.Name).Id;
+            }
             var viewModel = new ViewModelAgendaProfissional();
             if (profId1 == null)
             {

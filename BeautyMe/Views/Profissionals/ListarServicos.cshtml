@@ -9,7 +9,7 @@
 }
 
 @if (Model.Count() > 0) {
-<header class="products-header" style="margin-top:60px">
+<header class="products-header" style="margin-top:50px">
         <p class="products-header--title">@Model[0].Profissional.Name</p>
 </header>
 <main>
@@ -48,3 +48,9 @@
         </div>
     </main>
 }
+<style>
+    .body-content {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+</style>

@@ -4,11 +4,11 @@
 @{
     ViewBag.Title = "Index";
 }
-<div style="margin-top:60px;">
+<div style="margin-top:50px;">
     <header class="partner-header">
         <div class="partner-header--box">
             <div class="partner-header--box__iconbox">
-                <img class="partner-header--box__icon" src="https://i.imgur.com/VeJSOlR.png" alt="">
+                
             </div>
             <div class="partner-header--box__info">
                 <p class="partner-header--box__infotitle">FIAP</p>
@@ -22,7 +22,7 @@
     </header>
     <main>
         <div class="home-content">
-            <a href="@Url.Action("Create")" >
+            <a href="@Url.Action("Create")">
                 <i class="glyphicon glyphicon-plus"></i>
                 Adicionar Serviço
             </a>
@@ -48,10 +48,14 @@
                         </div>
                     </div>
                 }
-                </div>
             </div>
+        </div>
     </main>
 
+    <style>
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+    </style>
 
-
-                

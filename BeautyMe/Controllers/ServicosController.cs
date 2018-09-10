@@ -51,8 +51,7 @@ namespace BeautyMe.Controllers
         {
             if (ModelState.IsValid)
             {
-                
-                servico.Profissional = _contexto.ProfissionalEntities.ToList().First();//logica para pegar o profissional logado
+                servico.Profissional = _contexto.ProfissionalEntities.ToList().Find(a => a.Email == User.Identity.Name);
                 _contexto.ServicosEntities.Add(servico);
                 _contexto.SaveChanges();
                 return RedirectToAction("Index");

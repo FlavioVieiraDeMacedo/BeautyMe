@@ -8,10 +8,26 @@ namespace BeautyMe.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Pesquisar", "Servicos");
+            }
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Index(string Pesquisar=" ")
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Pesquisar", "Servicos");
+            }
+            return View();
+        }
+
 
         public ActionResult About()
         {

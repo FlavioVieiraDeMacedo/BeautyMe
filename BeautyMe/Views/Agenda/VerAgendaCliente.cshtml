@@ -1,37 +1,29 @@
-﻿@model List<BeautyMe.Models.Agenda>
+﻿<link href="~/Content/cssDoGiovani.css" rel="stylesheet" />
+@model List<BeautyMe.Models.Agenda>
 @{
     ViewBag.Title = "VerAgendaCliente";
 }
-
-<h2>Minha Agenda</h2>
-
-<div class="agenda">
-    <div class="table-responsive">
-        <table class="table table-condensed table-bordered">
-            
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td class="agenda-date" class="active" rowspan="1">
-                            <div class="dayofmonth">@item.Data.Day</div>
-                            <div class="shortdate text-muted">@item.Data.Month/@item.Data.Year</div>
-                        </td>
-                        <td class="agenda-time">
-                           @item.Data.Minute:@item.Data.Second
-                        </td>
-                        <td class="agenda-events">
-                            <div class="agenda-event">
-                                @item.Servico.Name  com o profissional <b>@item.Servico.Profissional.Name</b>
-                            </div>
-                        </td>
-                    </tr>
-
-
-
-                }
-
-            </tbody>
-        </table>
+<h2 style="margin-top:60px; font-size:2em;">Minha Agenda</h2>
+<hr />
+<div class="home-content" >
+    <div class="product-list">
+        @foreach (var item in Model)
+        {
+            <div class="product">
+                <div class="product--imagebox">
+                    <div class="agenda-date">
+                        <div class="dayofmonth" style="font-size:3em;margin-right:25px">@item.Data.Day</div>
+                        <div class="shortdate text-muted">@item.Data.Month/@item.Data.Year</div>
+                    </div>
+                </div>
+                <div class="product--info">
+                    <p class="product--info__title" style="font-size:1.5em;margin-bottom: 0px;">@item.Servico.Name</p>
+                    <p class="product--info__item">Horario: @item.Data.Minute:@item.Data.Second</p>
+                    <p class="product--info__item">R$ @item.Servico.Preco</p>
+                    <p class="product--info__item">Profissional: @item.Servico.Profissional.Name</p>
+                </div>
+            </div>
+        }
     </div>
 </div>
+        

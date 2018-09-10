@@ -57,7 +57,7 @@ namespace BeautyMe.Controllers
                 profissional.Email = User.Identity.Name;
                 _contexto.ProfissionalEntities.Add(profissional);
                 _contexto.SaveChanges();
-                return RedirectToAction("Agenda");
+                return RedirectToAction("Index","Agenda");
             }
 
             return View(profissional);
