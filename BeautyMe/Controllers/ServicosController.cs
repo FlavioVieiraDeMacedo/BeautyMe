@@ -86,11 +86,18 @@ namespace BeautyMe.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize]
-        public ActionResult Edit([Bind(Include = "Id,Name,Descricao,Preco,Tempo")] Servico servico)
+        public ActionResult Edit(Servico servico)
         {
+            
             if (ModelState.IsValid)
             {
-                _contexto.Entry(servico).State = EntityState.Modified;
+                var serv = _contexto.ServicosEntities.ToList().Find(a => a.Id == servico.Id);
+                serv.Name = servico.Name;
+                serv.Preco = servico.Preco;
+                serv.Descricao = servico.Descricao;
+                serv.Tempo = servico.Tempo;
+                
+                _contexto.Entry(serv).State = EntityState.Modified;
                 _contexto.SaveChanges();
                 return RedirectToAction("Index");
             }
