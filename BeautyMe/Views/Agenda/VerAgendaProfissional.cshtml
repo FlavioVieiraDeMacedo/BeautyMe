@@ -1,52 +1,74 @@
-﻿@model BeautyMe.Models.ViewModelAgendaProfissional
+﻿<link href="~/Content/cssDoGiovani.css" rel="stylesheet" />
+@model BeautyMe.Models.ViewModelAgendaProfissional
 @{
     ViewBag.Title = "VerAgendaProfissional";
 }
+<header class="partner-header" style="margin-top:50px;">
+    <div class="partner-header--box">
+        <div class="partner-header--box__iconbox">
 
-<h2> @Model.NomeProf</h2>
+        </div>
+        <div class="partner-header--box__info">
+
+            <p class="partner-header--box__infotitle">@Model.NomeProf</p>
+            @if (User.IsInRole("Cliente"))
+            {
+                <p>Verifique os horarios para agendar em uma data disponivel</p>
+            }
+            else
+            {
+                <p>Fique de olho para nao esquecer seus compromissos</p>
+            }
+        </div>
+        <div class="partner-header--box__logobox">
+            <img class="partner-header--box__logo" src="data:image/jpeg;base64,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" alt="">
+        </div>
+    </div>
+</header>
+
 
 @if (User.IsInRole("Cliente"))
 {
     using (Html.BeginForm())
     {
         @Html.HiddenFor(a => a.IdProf);
-        <p>Deseja agendar um serviço com esse profissional?</p>
         <button class="btn btn-success" type="submit" style="width:100%">
-            Agendar Agora
+            Agendar com este profissional
         </button>
     }
 }
-<hr />
-<div class="list-group">
-    @foreach (var item in Model.agenda)
-    {
-
-
-        if (User.IsInRole("Profissional"))
+<div class="home-content">
+    <div class="product-list">
+        @foreach (var item in Model.agenda)
         {
-            <div class="list-group-item">
-                <h3>@item.Servico.Name  -  @item.Data.Date.ToShortDateString() @item.Data.Date.ToShortTimeString() </h3>
-                <p>
-                    Tempo estimado: @item.Servico.Tempo
-                    <br />
-                    Cliente: @item.Cliente.Name
-                    <br />
-                    Localização: @item.Cliente.Cidade  @item.Cliente.Bairro
-                </p>
-
-            </div>
-        }
-        if (User.IsInRole("Cliente"))
-        {
-            <div class="list-group-item">
-                <div class="row">
-                    <div class="col-md-9"><h3><small class="text-danger">Horário Ocupado - @item.Data.Date.ToShortDateString() @item.Data.Date.ToShortTimeString() - Tempo estimado: @item.Servico.Tempo</small></h3></div>
+            <div class="product">
+                <div class="product--imagebox">
+                    <div class="agenda-date">
+                        <div class="dayofmonth" style="font-size:3em;margin-right:25px">@item.Data.Day</div>
+                        <div class="shortdate text-muted">@item.Data.Month/@item.Data.Year</div>
+                    </div>
+                </div>
+                <div class="product--info">
+                    <p class="product--info__title" style="font-size:1.5em;margin-bottom: 0px;">Horario ocupado</p>
+                    <p class="product--info__item">As: @item.Data.Hour:@item.Data.Minute</p>
+                    <p class="product--info__item">Tempo estimado @item.Servico.Tempo</p>
+                    @*@if (User.IsInRole("Profissional"))
+                    {
+                        <p class="product--info__item">Cliente: @item.Cliente.Name</p>
+                        <p class="product--info__item">Localização: @item.Cliente.Cidade  @item.Cliente.Bairro</p>
+                    }*@
                 </div>
             </div>
         }
-
-
-        <br />
-    }
+    </div>
 </div>
+
+
+
+<style>
+    .body-content {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+</style>
 

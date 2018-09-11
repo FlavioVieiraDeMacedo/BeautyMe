@@ -15,6 +15,7 @@ namespace BeautyMe.Controllers
         private Contexto _contexto = new Contexto();
 
         // GET: Servicos
+        [Authorize]
         public ActionResult Index()
         {
             var servicos = _contexto.ServicosEntities.ToList().Where(a => a.Profissional.Email == User.Identity.Name);
@@ -22,6 +23,7 @@ namespace BeautyMe.Controllers
         }
 
         // GET: Servicos/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace BeautyMe.Controllers
         }
 
         // GET: Servicos/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -47,6 +50,7 @@ namespace BeautyMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "Id,Name,Descricao,Preco,Tempo")] Servico servico)
         {
             if (ModelState.IsValid)
@@ -61,6 +65,7 @@ namespace BeautyMe.Controllers
         }
 
         // GET: Servicos/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -80,6 +85,7 @@ namespace BeautyMe.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "Id,Name,Descricao,Preco,Tempo")] Servico servico)
         {
             if (ModelState.IsValid)
@@ -92,6 +98,7 @@ namespace BeautyMe.Controllers
         }
 
         // GET: Servicos/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,6 +116,7 @@ namespace BeautyMe.Controllers
         // POST: Servicos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Servico servico = _contexto.ServicosEntities.Find(id);

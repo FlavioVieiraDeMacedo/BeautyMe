@@ -3,9 +3,30 @@
 @{
     ViewBag.Title = "VerAgendaCliente";
 }
-<h2 style="margin-top:60px; font-size:2em;">Minha Agenda</h2>
-<hr />
-<div class="home-content" >
+<header class="partner-header" style="margin-top:50px;">
+    <div class="partner-header--box">
+        <div class="partner-header--box__iconbox">
+
+        </div>
+        <div class="partner-header--box__info">
+            @if (Model.Count() > 0)
+            {
+                <p class="partner-header--box__infotitle">Minha Agenda</p>
+                <p>@Model[0].Cliente.Name</p>
+                <p>Perfil:Cliente</p>
+            }
+            else
+            {
+                <p class="partner-header--box__infotitle">Olá</p>
+                <p>Você ainda não possui nenhum serviço agendado</p>
+            }
+        </div>
+        <div class="partner-header--box__logobox">
+            <img class="partner-header--box__logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg9KklT_g3z-hi6mtHCRxUDwCIdvT6qZivKK6qULTcLjl6xXdWFw" alt="">
+        </div>
+    </div>
+</header>
+<div class="home-content">
     <div class="product-list">
         @foreach (var item in Model)
         {
@@ -18,7 +39,7 @@
                 </div>
                 <div class="product--info">
                     <p class="product--info__title" style="font-size:1.5em;margin-bottom: 0px;">@item.Servico.Name</p>
-                    <p class="product--info__item">Horario: @item.Data.Minute:@item.Data.Second</p>
+                    <p class="product--info__item">Horario: @item.Data.Hour:@item.Data.Minute</p>
                     <p class="product--info__item">R$ @item.Servico.Preco</p>
                     <p class="product--info__item">Profissional: @item.Servico.Profissional.Name</p>
                 </div>
@@ -26,4 +47,10 @@
         }
     </div>
 </div>
-        
+
+<style>
+    .body-content {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+</style>

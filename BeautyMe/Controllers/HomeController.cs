@@ -11,36 +11,15 @@ namespace BeautyMe.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Pesquisar", "Servicos");
-            }
             return View();
         }
 
         [HttpPost]
         public ActionResult Index(string Pesquisar=" ")
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Pesquisar", "Servicos");
-            }
-            return View();
+            return RedirectToAction("Pesquisar", "Servicos");
         }
 
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        
     }
 }

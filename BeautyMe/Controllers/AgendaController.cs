@@ -109,7 +109,6 @@ namespace BeautyMe.Controllers
             }
 
             var prof = db.ProfissionalEntities.ToList().Find(a => a.Id == profId1);
-            var cli = db.ClienteEntities.ToList().First();
             var servicos = new List<int>();
 
             foreach (var item in prof.Servicos)

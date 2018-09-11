@@ -13,28 +13,14 @@
         <p class="products-header--title">@Model[0].Profissional.Name</p>
 </header>
 <main>
-    <div class="partner-avaliation">
-        <div class="partner-avaliation--item1">
-            <div class="avaliation">
-                <div class="avaliation--stars">
-                    <span>4,9</span>
-                    <img src="https://i.imgur.com/gCmogS4.png" alt="">
-                </div>
-                <div>Avaliações</div>
-            </div>
-        </div>
-        <div class="partner-avaliation--item2">
-            <p>Manicure/Cabeleleiro - $$$</p>
-            <p>Horarios disponíveis</p>
-        </div>
-    </div>
+    
     <div class="home-content">
         <div class="product-list">
             @foreach (var item in Model)
             {
                 <div class="product">
                     <div class="product--imagebox">
-                        <img class="service--image" src="https://via.placeholder.com/100x60" alt="">
+                        <img class="service--image" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxIHBhATEhIQEBAQFSAVFRYVFRYOEBsgIB0iFyAdHx8kIDQsJCYmJxUfLT0tJjUrMy46Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3NS03NTU1LTUwLS03Ly03LTc1NS8yNSs3LS0rNTc1Ly03OC84NzcvLTU1LTIsNTUtLf/AABEIAEYARgMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAAFAAMEBgcBAv/EADEQAAEDAgUBBwMEAwEAAAAAAAECAxEABAUSITFREwYiQWFxgZEUobEHMsHhFlJiFf/EABkBAAMBAQEAAAAAAAAAAAAAAAIDBAUBAP/EACIRAAICAgICAgMAAAAAAAAAAAABAhEDIUFREiIxgQQTYf/aAAwDAQACEQMRAD8AKXP6bJu7kEXbpRGykIWvf/YR+KqPaHAvpMURbtKzBRIBggkDQq15P4rVmrg2qCFSUwYVx5VVrC4Riva98gDLbNhtBOsmRJA9VfAqSeKEVcUW4m7p/Ab7L9mGMGtkApzvK/cuJSnSYnaeaNraTrqoEagQRoODzXHsQQytKOqhBQNElQCtfLepTFwXgFAhYHiCDXF0E7+RpdiEtarKkq/aFf3VO7U4C282QpMHwkfg1YsZxP6V8JS2p95WgSDlSB6nYVCu2bp1o53bVSSNGglQj0XO/tFKyU06G401VmDYtYfSXShsQdDR/AMTcRhiwFAuZ4IUJJEc8UT7Z4bmYK8pBG4Ipv8ASK/+l7Sls6oebKSDrqO8P5oXFZ4VI5kj4S0D0dRqRASCZ08PKuVvLlm1cjvNNK9UJNcoX+NLsB5OiJfW2ezcCQQopMTzBiqF2JA/yHEkA94BJQqIAGaCT7Rp5VqeXKkmTEHzqgdn7E236h4kgkDrtJWkRpGYffU1pZVrQjHLZPYxeyTe9BKEFxRjRsvvLPJIBJ9TR7DwlsK6YjwIgpg8EHY1y07JMs3hcyIS4rWQMxnmpKkIwlxGdwJ6i8iNDJUZgAffgVKoS5HvJDaRVri6deuXQkJ6gOVGaQj359Kh3OCXj1oCp5JfzZpSAG44CQkfM0VuVJbxlzJmJbAUoFJCFSRolW2byqypZBanefmkRTdopnJRplExuwVcYapK4zlJB9Y0rLcDYdt8eQWwoLbcEkbCTGpracaayPDg1VxZpYuAoDKQoE/9CdY9KXCfg2g5Y1NJtmjsq7tcpizV1WhB3E0q0KM4NpRpQRqz6OMqcgdUpKQojwOse0GjDbkjYfNRb5uXG1we4qSAfbXypmbavoHE6ddnBd/TCVSBmAKiZWonwA8+BTb+JIfuRl7yhoAnvxTmI4aMQtgdwCCOQRpM8QSDQrCLROHJUhtSmQN0kBUeOhPr96TJyTrgfBQlcuT3iDbyBoyYneUp96HYNjarq9W1kWMh1Jgo9j41PvkB+czji/GM2leMJbCWz3Qgp1HgP7qea9tFScf17I2MyXCODFBXWkhwKIM7A+HEAcmjt8oKcHzVA7H2pxLta6s5y1blXJTnUokwNtqVHH5yOvJ4RNTw5rpspHApUk3QA/aqlWiZ2yQhWm9OpVpyKjNpkU+luRTBdHpNxDzaAqUkFKxGsnVJ/IqCytLLMZStKYJnVZ5jmm79zouHWCkg+e390y3dHrQY2k+5AH81LOftRTjx+tjv19ncMZ23kd7YEGR6iJFDHr5tgqhbaid4ClE/IAqs31qbe7Vl0BUdvU1LsEpVod6lnlb4LI4VHmyX9TnM7SaG9irxtsLQjQhZzg6Kkq0NFb5CWLWdqF/TNWzvVWcjkggIgLjgk6AHxnmhwt2z2ZLxRdkK01pUEZxVVwylaUSlW2VPUHySB8Uqt2RUWBu4JHFeXrotsqVJ0HhSpU+T0Kik2BFvl56Tzm/mlaIK7h5ZO8BI4CRJ+SftSpVnJ2zRapaA77mdwzzTaVdO6TGxNKlSltDg5h+W7uVJWnNlTKZ2BneKCYf2e/8AZxZ7qOENMkKUBqs5tQB4e5pUqOHH2KyaUmv4Xyxt2bK3CW2wB595R9TSpUqoU3RC4qz/2Q==" alt="">
                     </div>
 
                     <div class="product--info">
