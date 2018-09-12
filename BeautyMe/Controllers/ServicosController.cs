@@ -18,7 +18,7 @@ namespace BeautyMe.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            var servicos = _contexto.ServicosEntities.ToList().Where(a => a.Profissional.Email == User.Identity.Name);
+            var servicos = _contexto.ServicosEntities.ToList().Where(a => a.Profissional.Email == User.Identity.Name && a.Desativado==false);
             return View(servicos);
         }
 

@@ -28,7 +28,7 @@
 </header>
 <div class="home-content">
     <div class="product-list">
-        @foreach (var item in Model)
+        @foreach (var item in Model.OrderBy(a=>a.Data))
         {
             <div class="product">
                 <div class="product--imagebox">

@@ -61,11 +61,11 @@
                                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "service--actions__link" })
                                 @if (item.Desativado)
                                 {
-                                    @Html.ActionLink("Ativar", "Delete", new { id = item.Id }, new { @class = "service--actions__link" })
+                                    @Html.ActionLink("Reativar", "Delete", new { id = item.Id }, new { @class = "service--actions__link" })
                                 }
                                 else
                                 {
-                                   @Html.ActionLink("Desativar", "Delete", new { id = item.Id }, new { @class = "service--actions__link" })
+                                   @Html.ActionLink("Deletar", "Delete", new { id = item.Id }, new { @class = "service--actions__link" })
                                 }
                             </div>
                         </div>

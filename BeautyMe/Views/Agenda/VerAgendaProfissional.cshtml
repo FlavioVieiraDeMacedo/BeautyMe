@@ -37,7 +37,7 @@
 }
 <div class="home-content">
     <div class="product-list">
-        @foreach (var item in Model.agenda)
+        @foreach (var item in Model.agenda.OrderBy(a=>a.Data))
         {
             <div class="product">
                 <div class="product--imagebox">
