@@ -6,7 +6,14 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <script>
+        window.onload = function(e) {
+            const redirectPage = 'Home/OnlyMobile'
+            const isMobile = window.matchMedia && window.matchMedia('(max-width: 800px)').matches;
+            if (!isMobile) window.location.pathname = redirectPage;
+        }
 
+    </script>
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">

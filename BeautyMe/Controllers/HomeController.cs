@@ -20,6 +20,11 @@ namespace BeautyMe.Controllers
             return RedirectToAction("Pesquisar", "Servicos");
         }
 
-        
+        [HttpGet]
+        public ActionResult OnlyMobile()
+        {
+            return View();
+        }
+
     }
 }

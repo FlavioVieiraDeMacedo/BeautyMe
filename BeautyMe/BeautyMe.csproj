@@ -304,6 +304,7 @@
     <Content Include="Views\Agenda\Index.cshtml" />
     <Content Include="Views\Agenda\VerAgendaCliente.cshtml" />
     <Content Include="Views\Agenda\VerAgendaProfissional.cshtml" />
+    <Content Include="Views\Home\OnlyMobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

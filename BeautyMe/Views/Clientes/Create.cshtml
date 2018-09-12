@@ -25,7 +25,7 @@
 
             @Html.EditorFor(model => model.CPF, new { htmlAttributes = new { @class = "login-form--input", placeholder = "CPF" } })
             @Html.ValidationMessageFor(model => model.CPF, "", new { @class = "text-danger" })
-            <hr />
+            
             @Html.EditorFor(model => model.Pais, new { htmlAttributes = new { @class = "login-form--input", placeholder = "Pais" } })
             @Html.ValidationMessageFor(model => model.Pais, "", new { @class = "text-danger" })
 
@@ -40,69 +40,83 @@
 
             @Html.EditorFor(model => model.Complemento, new { htmlAttributes = new { @class = "login-form--input", placeholder = "Complemento" } })
             @Html.ValidationMessageFor(model => model.Complemento, "", new { @class = "text-danger" })
-            <hr />
-
+           
 
         </main>
     </div>
 
     <div class="panel panel-default">
-        <div class="panel-heading">Dados da residencia</div>
-        <div class="panel-body">
+        <div class="panel-heading -primary">Dados da residencia</div>
+        <div class="panel-body panel-body__beauty">
+
             <div class="form-group">
-                @Html.LabelFor(model => model.Tomada110, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.Tomada110, "", new { @class = "text-danger" })
+                <div class="beauty-col">
                     <div class="checkbox">
-                        @Html.EditorFor(model => model.Tomada110)
-                        @Html.ValidationMessageFor(model => model.Tomada110, "", new { @class = "text-danger" })
+
+                        @Html.EditorFor(model => model.Tomada110, new { htmlAttributes = new { @class = "check-box" } })
                     </div>
+                    @Html.LabelFor(model => model.Tomada110, htmlAttributes: new { @class = "control-label col-md-2" })
                 </div>
+
+                <span class="field-validation-valid text-danger" data-valmsg-for="Tomada110" data-valmsg-replace="true"></span>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Tomada220, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.Tomada220, "", new { @class = "text-danger" })
+                <div class="beauty-col">
                     <div class="checkbox">
-                        @Html.EditorFor(model => model.Tomada220)
-                        @Html.ValidationMessageFor(model => model.Tomada220, "", new { @class = "text-danger" })
+
+                        @Html.EditorFor(model => model.Tomada220, new { htmlAttributes = new { @class = "check-box" } })
                     </div>
+                    @Html.LabelFor(model => model.Tomada220, htmlAttributes: new { @class = "control-label col-md-2" })
                 </div>
+
+                <span class="field-validation-valid text-danger" data-valmsg-for="Tomada220" data-valmsg-replace="true"></span>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Espelho, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.Espelho, "", new { @class = "text-danger" })
+                <div class="beauty-col">
                     <div class="checkbox">
-                        @Html.EditorFor(model => model.Espelho)
-                        @Html.ValidationMessageFor(model => model.Espelho, "", new { @class = "text-danger" })
+
+                        @Html.EditorFor(model => model.Espelho, new { htmlAttributes = new { @class = "check-box" } })
                     </div>
+                    @Html.LabelFor(model => model.Espelho, htmlAttributes: new { @class = "control-label col-md-2" })
                 </div>
+
+                <span class="field-validation-valid text-danger" data-valmsg-for="Espelho" data-valmsg-replace="true"></span>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Cadeira, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.Cadeira, "", new { @class = "text-danger" })
+                <div class="beauty-col">
                     <div class="checkbox">
-                        @Html.EditorFor(model => model.Cadeira)
-                        @Html.ValidationMessageFor(model => model.Cadeira, "", new { @class = "text-danger" })
+
+                        @Html.EditorFor(model => model.Cadeira, new { htmlAttributes = new { @class = "check-box" } })
                     </div>
+                    @Html.LabelFor(model => model.Cadeira, htmlAttributes: new { @class = "control-label col-md-2" })
                 </div>
+
+                <span class="field-validation-valid text-danger" data-valmsg-for="Cadeira" data-valmsg-replace="true"></span>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Agua, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                @Html.ValidationMessageFor(model => model.Agua, "", new { @class = "text-danger" })
+                <div class="beauty-col">
                     <div class="checkbox">
-                        @Html.EditorFor(model => model.Agua)
-                        @Html.ValidationMessageFor(model => model.Agua, "", new { @class = "text-danger" })
+
+                        @Html.EditorFor(model => model.Agua, new { htmlAttributes = new { @class = "check-box" } })
                     </div>
+                    @Html.LabelFor(model => model.Agua, htmlAttributes: new { @class = "control-label col-md-2" })
                 </div>
+
+                <span class="field-validation-valid text-danger" data-valmsg-for="Agua" data-valmsg-replace="true"></span>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Luz, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.Luz, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.LabelFor(model => model.Luz, htmlAttributes: new { @class = "control-label" })
+                <div class="">
                     <select class="form-control" id="Luz" name="Luz">
                         <option value="fraca">Fraca</option>
                         <option value="media">Média</option>
@@ -113,11 +127,29 @@
             </div>
         </div>
     </div>
+
     <button class="login-form--button" type="submit">Registrar</button>
     @Html.ValidationSummary("", new { @class = "text-danger" })
 }
 
 
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<style>
+
+    .beauty-col {
+        margin-left: 20px;
+    }
+
+    .panel-heading.-primary {
+        background-color: #f95757;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    .panel-body__beauty .control-label {
+        padding-left: 0;
+    }
+</style>
