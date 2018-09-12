@@ -117,7 +117,10 @@ namespace BeautyMe.Controllers
             {
                 return HttpNotFound();
             }
-            return View(servico);
+            servico.Desativado = !servico.Desativado;
+            _contexto.Entry(servico).State = EntityState.Modified;
+            _contexto.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // POST: Servicos/Delete/5
@@ -134,7 +137,7 @@ namespace BeautyMe.Controllers
 
         public ActionResult Pesquisar(string pesquisa = "")
         {
-            return View(_contexto.ServicosEntities.ToList().Where(p => p.Name.Contains(pesquisa)).ToList());
+            return View(_contexto.ServicosEntities.ToList().Where(p => p.Name.Contains(pesquisa)&& p.Desativado == false).ToList());
         }
 
         protected override void Dispose(bool disposing)

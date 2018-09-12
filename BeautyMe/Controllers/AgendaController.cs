@@ -42,7 +42,7 @@ namespace BeautyMe.Controllers
         public ActionResult Create(int IdProf)
         {
             ViewModelCreateAgenda viewModel = new ViewModelCreateAgenda() {
-                servicosDoProfissional = db.ProfissionalEntities.Find(IdProf).Servicos.ToList()
+                servicosDoProfissional = db.ProfissionalEntities.Find(IdProf).Servicos.Where(a=>a.Desativado==false).ToList()
             };
             return View(viewModel);
         }
@@ -59,7 +59,7 @@ namespace BeautyMe.Controllers
             if (ModelState.IsValid)
             {
                 agenda.Cliente = db.ClienteEntities.Find(IdCli);
-                agenda.Servico = db.ServicosEntities.Find(viewModel.IdServ);
+                agenda.Servico = db.ServicosEntities.Where(a => a.Id == viewModel.IdServ && a.Desativado == false).First();
 
                 db.AgendaEntities.Add(agenda);
                 db.SaveChanges();

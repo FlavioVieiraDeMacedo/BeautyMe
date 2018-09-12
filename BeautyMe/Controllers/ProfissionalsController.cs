@@ -136,7 +136,7 @@ namespace BeautyMe.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var profissional = _contexto.ProfissionalEntities.ToList().Find(a => a.Id == profId);
-            return View(profissional.Servicos.ToList());
+            return View(profissional.Servicos.Where(a=>a.Desativado==false).ToList());
         }
     }
 }

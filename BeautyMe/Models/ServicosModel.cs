@@ -11,7 +11,7 @@ namespace BeautyMe.Models
         public string Descricao { get; set; }
         public double Preco { get; set; }
         public string Tempo { get; set; }
-
+        public bool Desativado { get; set; }
         [Required]
         public int Profissional_Id { get; set; }
 

@@ -43,12 +43,30 @@
                 {
                     <div class="service">
                         <div class="service--info">
-                            <p class="service--info__title">@Html.DisplayFor(modelItem => item.Name)</p>
-                            <p class="service--info__price">R$ @Html.DisplayFor(modelItem => item.Preco)</p>
-                            <p class="service--info__data">Tratamento de: @Html.DisplayFor(modelItem => item.Tempo)</p>
+                            @if (item.Desativado)
+                            {
+                                <strike>
+                                    <p class="service--info__title">@Html.DisplayFor(modelItem => item.Name)</p>
+                                    <p class="service--info__price">R$ @Html.DisplayFor(modelItem => item.Preco)</p>
+                                    <p class="service--info__data">Tratamento de: @Html.DisplayFor(modelItem => item.Tempo)</p>
+                                </strike>
+                            }
+                            else
+                            {
+                                <p class="service--info__title">@Html.DisplayFor(modelItem => item.Name)</p>
+                                <p class="service--info__price">R$ @Html.DisplayFor(modelItem => item.Preco)</p>
+                                <p class="service--info__data">Tratamento de: @Html.DisplayFor(modelItem => item.Tempo)</p>
+                            }
                             <div class="service--actions">
                                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "service--actions__link" })
-                                @*@Html.ActionLink("Remover", "Delete", new { id = item.Id }, new { @class = "service--actions__link" })*@
+                                @if (item.Desativado)
+                                {
+                                    @Html.ActionLink("Ativar", "Delete", new { id = item.Id }, new { @class = "service--actions__link" })
+                                }
+                                else
+                                {
+                                   @Html.ActionLink("Desativar", "Delete", new { id = item.Id }, new { @class = "service--actions__link" })
+                                }
                             </div>
                         </div>
                         <div class="service--imagebox">
