@@ -1,65 +1,45 @@
-﻿@model BeautyMe.Models.Servico
+﻿<link href="~/Content/cssDoGiovani.css" rel="stylesheet" />
+@model BeautyMe.Models.Servico
 
 @{
     ViewBag.Title = "Edit";
 }
+<header class="products-header" style="margin-top:50px">
+    <a href="@Url.Action("Index")" class="products-header--icon">
+        <img src="https://i.imgur.com/VeJSOlR.png" alt="">
+    </a>
+    <p class="products-header--title">Editar Serviço</p>
+</header>
 
-<h2>Editar Serviço</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <hr />
+<div style="margin-top:30px">
+    @using (Html.BeginForm())
+    {
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
+        @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "login-form--input", placeholder = "Nome" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "login-form--input", placeholder = "Descrição" } })
+        @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Preco, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Preco, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Preco, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.EditorFor(model => model.Preco, new { htmlAttributes = new { @class = "login-form--input", placeholder = "Preço" } })
+        @Html.ValidationMessageFor(model => model.Preco, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Tempo, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Tempo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Tempo, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @Html.EditorFor(model => model.Tempo, new { htmlAttributes = new { @class = "login-form--input", placeholder = "Tempo estimado" } })
+        @Html.ValidationMessageFor(model => model.Tempo, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-        </div>
-    </div>
-}
+        <button class="login-form--button" type="submit">Salvar</button>
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+    }
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    <style>
+        .body-content {
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+    </style>
