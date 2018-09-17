@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BeautyMe.Models;
 using Microsoft.AspNet.Identity;
+using System.Web.Script.Serialization;
 
 namespace BeautyMe.Controllers
 {
@@ -125,6 +126,63 @@ namespace BeautyMe.Controllers
             viewModel.NomeProf = prof.Name;
             viewModel.agenda = agenda;
             viewModel.IdProf = (int)profId1;
+
+            viewModel.calendario = new List<ViewModeldatas>();
+
+            List<string> aux = new List<string>();
+            foreach (var item in viewModel.agenda)
+            {
+                if (item.Data.Month < 10)
+                {
+                    aux.Add(item.Data.Year + "-0" + item.Data.Month + "-" + item.Data.Day);
+                }
+                else
+                {
+                    aux.Add(item.Data.Year + "-" + item.Data.Month + "-" + item.Data.Day);
+                }
+                
+            }
+
+            foreach (var item in viewModel.agenda.Select(r => r.Data.Date).Distinct().ToList())
+            {
+                int auxiliar = 0;
+                string mes = "";
+                foreach (var item2 in aux)
+                {
+                    if (item.Month < 10)
+                    {
+                        mes = "0" + item.Month ;
+                    }
+                    else
+                    {
+                        mes = item.Month.ToString();
+                    }
+                    
+                    if (item2 == item.Year + "-" + mes + "-" + item.Day)
+                    {
+                        if (auxiliar==0)
+                        {
+                            if (item.Month<10)
+                            {
+                                viewModel.calendario.Add(new ViewModeldatas() { data = item.Year + "-0" + item.Month + "-" + item.Day, quantidade = 1 });
+                            }
+                            else
+                            {
+                                viewModel.calendario.Add(new ViewModeldatas() { data = item.Year + "-" + item.Month + "-" + item.Day, quantidade = 1 });
+                            }
+                            
+                        }
+                        else if(auxiliar > 0)
+                        {
+                            viewModel.calendario.Where(a => a.data == item2).First().quantidade++;
+                        }
+                        viewModel.calendario = viewModel.calendario.Distinct().ToList();
+                       auxiliar++;
+                    }
+                }
+            }
+
+
             return View(viewModel);
         }
         [HttpPost]

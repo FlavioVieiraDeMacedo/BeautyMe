@@ -88,25 +88,35 @@
         <button class="btn btn-success beauty-button" type="submit">Agendar com este profissional</button>
     }
 }
-
+@MvcHtmlString.Create("'")
 <script type="text/javascript">
-	$(document).ready(function () {
+    $(document).ready(function () {
 
-		var json = {
-			"2018-09-30": { "number": 5 },
-			"2018-09-26": { "number": 1, "url": "#" },
-			"2018-09-03": { "number": 1 },
-			"2018-09-12": { "number": 2 },
-			"2018-10-23": { "number": 1 },
-			"2018-10-3": { "number": 1 },
-			"2018-10-12": { "number": 1 }
-		}
-			
-			$(".responsive-calendar").responsiveCalendar({
-				time: '2018-09',
-				events: json
-			});
+        var json = {
+
+           
+
+            @foreach (var item in Model.calendario)
+            {
+                string mes = "";
+                
+                List<string> datas = new List<string>();
+                
+                if (Model.calendario.Last().data==item.data)
+                {
+                    @Html.Raw("\""+item.data+ "\" :{\"number\":"+item.quantidade+"}")
+                }else
+                {
+                    @Html.Raw("\""+item.data+ "\" :{\"number\":" + item.quantidade+ "},")
+                }
+            }
+        }
+
+		$(".responsive-calendar").responsiveCalendar({
+			time: '2018-09',
+			events: json
 		});
+    });
 </script>
 
 
